@@ -2098,13 +2098,13 @@ class ImportEnrollmentsIntoMysql(CourseSummaryEnrollmentDownstreamMixin, luigi.W
         }, **enrollment_kwargs)
 
         yield [
-            # CourseEnrollmentSummaryTableTask(**enrollment_kwargs),
-            # EnrollmentByGenderTask(**enrollment_kwargs),
-            # EnrollmentByBirthYearTask(**enrollment_kwargs),
-            # EnrollmentByEducationLevelTask(**enrollment_kwargs),
-            # EnrollmentDailyTask(**enrollment_kwargs),
-            ImportCourseSummaryEnrollmentsIntoMysql(**course_summary_kwargs), # TODO AZ THis guy looks like the problem but I'm not sure why
+            CourseEnrollmentSummaryTableTask(**enrollment_kwargs),
+            EnrollmentByGenderTask(**enrollment_kwargs),
+            EnrollmentByBirthYearTask(**enrollment_kwargs),
+            EnrollmentByEducationLevelTask(**enrollment_kwargs),
+            EnrollmentDailyTask(**enrollment_kwargs),
+            # ImportCourseSummaryEnrollmentsIntoMysql(**course_summary_kwargs), # TODO AZ THis guy looks like the problem but I'm not sure why
         ]
-        # if self.enable_course_catalog:
-        #     yield CourseProgramMetadataInsertToMysqlTask(**course_summary_kwargs)
+        if self.enable_course_catalog:
+            yield CourseProgramMetadataInsertToMysqlTask(**course_summary_kwargs)
 # TODO AZ Check the dates.  Most of them references a self.date that doesn't exist.  I've changed them to self.interval.date_b, but this is right for some but not necessarily all
