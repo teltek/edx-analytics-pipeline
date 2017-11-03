@@ -201,7 +201,7 @@
 
     - name: reinstall pandas
       shell: >
-        . {{ working_venv_dir }}/bin/activate && pip uninstall pandas && pip install pandas==0.13.0 --no-cache-dir
+        . {{ working_venv_dir }}/bin/activate && pip uninstall -y pandas && pip install pandas==0.13.0 --no-cache-dir
         chdir={{ working_repo_dir }}
 
     - name: show working directory
