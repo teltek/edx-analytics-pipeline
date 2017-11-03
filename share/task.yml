@@ -48,7 +48,7 @@
     - pipeline_repo_dir_name: repo
     - repos:
       - url: https://github.com/teltek/edx-analytics-pipeline.git
-        branch: open-release/ficus.master-pip
+        branch: open-release/ficus.master-proxy
         dir_name: "{{ pipeline_repo_dir_name }}"
     - working_repo_dir: "{{ working_dir }}/{{ pipeline_repo_dir_name }}"
 
@@ -106,7 +106,7 @@
       git: >
         repo={{ item.url }}
         dest={{ working_dir }}/{{ item.dir_name }}
-        version=open-release/ficus.master-pip
+        version=open-release/ficus.master-proxy
       with_items: repos
 
     - name: branches fetched
