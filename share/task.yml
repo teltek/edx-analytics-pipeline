@@ -199,5 +199,10 @@
     - name: boto configured
       copy: src=boto.cfg dest={{ working_repo_dir }}/.boto mode=644
 
+    - name: reinstall pandas
+      shell: >
+        . {{ working_venv_dir }}/bin/activate && pip uninstall pandas && pip install pandas==0.13.0 --no-cache-dir
+        chdir={{ working_repo_dir }}
+
     - name: show working directory
       debug: var=working_repo_dir
