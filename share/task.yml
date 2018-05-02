@@ -47,8 +47,8 @@
 
     - pipeline_repo_dir_name: repo
     - repos:
-      - url: https://github.com/edx/edx-analytics-pipeline.git
-        branch: master
+      - url: https://github.com/teltek/edx-analytics-pipeline.git
+        branch: open-release/ficus.master-fix
         dir_name: "{{ pipeline_repo_dir_name }}"
     - working_repo_dir: "{{ working_dir }}/{{ pipeline_repo_dir_name }}"
 
@@ -106,7 +106,7 @@
       git: >
         repo={{ item.url }}
         dest={{ working_dir }}/{{ item.dir_name }}
-        version=master
+        version=open-release/ficus.master-fix
       with_items: repos
 
     - name: branches fetched
@@ -194,6 +194,12 @@
 
     - name: boto configured
       copy: src=boto.cfg dest={{ working_repo_dir }}/.boto mode=644
+
+    - name: reinstall pandas
+      shell: >
+        . {{ working_venv_dir }}/bin/activate && pip -y uninstall pandas && pip install pandas==0.13.0 --no-cache-dir
+        chdir={{ working_repo_dir }}
+
 
     - name: show working directory
       debug: var=working_repo_dir
