@@ -1216,7 +1216,8 @@ class ModuleEngagementRosterPartitionTask(WeekIntervalMixin, ModuleEngagementDow
                 overwrite_from_date=self.overwrite_from_date,
             ),
             ExternalCourseEnrollmentTableTask(
-                interval_end=self.date
+                interval_end=self.date,
+                overwrite_n_days=2,
             ),
             ImportAuthUserTask(**kwargs_for_db_import),
             ImportCourseUserGroupTask(**kwargs_for_db_import),
