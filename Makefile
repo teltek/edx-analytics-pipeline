@@ -2,7 +2,7 @@
 .PHONY:	requirements test test-requirements .tox upgrade
 
 uninstall:
-	while pip uninstall -y edx.analytics.tasks; do true; done
+	# while pip uninstall -y edx.analytics.tasks; do true; done
 	python setup.py clean
 
 install: requirements uninstall
